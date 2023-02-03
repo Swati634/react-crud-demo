@@ -6,6 +6,23 @@
   height: 40vmin;
   pointer-events: none;
 }
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #21212185;
+  color: whitesmoke;
+  flex-direction: column;
+}
+.main-header {
+  font-family: "Montserrat", sans-serif;
+}
+.create-form label {
+  color: whitesmoke !important;
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px !important;
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -36,3 +53,4 @@
     transform: rotate(360deg);
   }
 }
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
