@@ -5,12 +5,11 @@ import { useNavigate } from 'react-router-dom';
 
 const Update = () => {
 
-    let history = useNavigate();
+    const navigate = useNavigate();
     const [id, setID] = useState();
     const [Name, setName] = useState("");
     const [Age, setAge] = useState("");
-    console.log(id, 'gdsjdhkjsw')
-
+    console.log(id, 'helloID')
 
     useEffect(() => {
         setID(localStorage.getItem("ID"));
@@ -21,7 +20,7 @@ const Update = () => {
     const updateAPIData = () => {
         axios
             .put(
-                `https://crudcrud.com/api/910b63c14fa04a2a95e9af8ab841c279/data/${id}`,
+                `https://crudcrud.com/api/c920eff5d28e4061a1feab657b3bc442/data/${id}`,
                 {
                     Name,
                     Age
@@ -29,7 +28,7 @@ const Update = () => {
                 }
             )
             .then(() => {
-                history.push("/read");
+                navigate("/read");
             });
 
     };
@@ -53,9 +52,11 @@ const Update = () => {
                     />
                 </Form.Field>
                 <Form.Field>
+                    {/* <Link to="/read"> */}
                     <Button type="submit" onClick={updateAPIData}>
                         Update
                     </Button>
+                    {/* </Link> */}
                 </Form.Field>
             </Form>
         </div>
