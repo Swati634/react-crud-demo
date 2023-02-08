@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
@@ -7,7 +7,12 @@ const Signup = () => {
     const [email, setEmail] = useState("")
     const [psw, setPassword] = useState("")
     const [cpsw, setCpsw] = useState("")
-
+    const getCookie = localStorage.getItem('token');
+    useEffect(() => {
+        if (getCookie) {
+            navigate('/');
+        }
+    }, [getCookie])
 
     async function signup() {
         let items = { name, email, psw, cpsw }
@@ -19,15 +24,14 @@ const Signup = () => {
             body: JSON.stringify({ 'name': name, 'email': email, 'psw': psw })
         };
         console.log(items, 'items')
-        let result = await fetch("https://crudcrud.com/api/986e900b602d4e1f8d36a2ef59cee9de/data", requestOptions)
+        let result = await fetch("https://crudcrud.com/api/b7fc87a7e1584fb4aaf12f7ec8493996/data", requestOptions)
         result = await result.json(items)
         console.log('result', result);
+        localStorage.setItem('token', email);
         setName("")
         setEmail("")
         setPassword("")
         setCpsw("")
-    }
-    const signupFun = () => {
         navigate("/")
     }
     return (
@@ -91,7 +95,7 @@ const Signup = () => {
                 </div>
                 <br />
                 <div className="signin-btn">
-                    <button onClick={() => signupFun()}>Sign Up</button>
+                    <button onClick={() => signup()}>Sign Up</button>
                 </div>
             </div>
         </>
