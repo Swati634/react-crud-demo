@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form } from "semantic-ui-react";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const Update = () => {
-
     const navigate = useNavigate();
     const [id, setID] = useState();
     const [Name, setName] = useState("");
     const [Age, setAge] = useState("");
-    console.log(id, 'helloID')
+    console.log(id, "helloID");
 
     useEffect(() => {
         setID(localStorage.getItem("ID"));
@@ -20,17 +19,15 @@ const Update = () => {
     const updateAPIData = () => {
         axios
             .put(
-                `https://crudcrud.com/api/c920eff5d28e4061a1feab657b3bc442/data/${id}`,
+                `https://crudcrud.com/api/1c3017059e0a4767af9981a0303f484b/data/${id}`,
                 {
                     Name,
-                    Age
-
+                    Age,
                 }
             )
             .then(() => {
                 navigate("/read");
             });
-
     };
     return (
         <div>
