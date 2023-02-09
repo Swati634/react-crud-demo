@@ -6,7 +6,7 @@ import Create from "./Create";
 
 const Read = () => {
     const navigate = useNavigate();
-    const url = `https://crudcrud.com/api/b7fc87a7e1584fb4aaf12f7ec8493996/data`;
+    const url = `https://crudcrud.com/api/a2414ada59e84780b12edd634d9eda47/data`;
     const [APIData, setAPIData] = useState([]);
     const [createForm, setForm] = useState(false);
     const [isEdit, setEdit] = useState(false);
@@ -29,12 +29,11 @@ const Read = () => {
     const onDelete = (id) => {
         axios
             .delete(
-                `https://crudcrud.com/api/b7fc87a7e1584fb4aaf12f7ec8493996/data/${id}`
+                `https://crudcrud.com/api/a2414ada59e84780b12edd634d9eda47/data/${id}`
             )
             .then(() => {
                 getData();
             });
-        console.log(getData(), "delete");
     };
     useEffect(() => {
         axios.get(url).then((response) => {

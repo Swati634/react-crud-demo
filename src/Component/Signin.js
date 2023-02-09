@@ -1,66 +1,67 @@
-import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Signin = () => {
-    const navigate = useNavigate()
-    const [email, setEmail] = useState("")
-    const [psw, setPassword] = useState("")
+    const navigate = useNavigate();
+    const [email, setEmail] = useState("");
+    const [psw, setPassword] = useState("");
     const [isLoggedin, setIsLoggedin] = useState(false);
-    const getCookie = localStorage.getItem('token');
+    const getCookie = localStorage.getItem("token");
     useEffect(() => {
         if (getCookie) {
-            navigate('/');
+            navigate("/");
         }
-    }, [getCookie])
+    }, [getCookie]);
 
     const IsValidate = () => {
         let isproceed = true;
-        let errormessage = 'Please enter the value in ';
+        let errormessage = "Please enter the value in ";
 
-        if (psw === null || psw === '') {
+        if (psw === null || psw === "") {
             isproceed = false;
-            errormessage += ' Password';
+            errormessage += " Password";
         }
-        if (email === null || email === '') {
+        if (email === null || email === "") {
             isproceed = false;
-            errormessage += ' Email';
+            errormessage += " Email";
         }
         if (!isproceed) {
-            alert(errormessage)
+            alert(errormessage);
         } else {
             if (/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email)) {
             } else {
                 isproceed = false;
-                alert('Please enter the valid email')
+                alert("Please enter the valid email");
             }
         }
         return isproceed;
-    }
+    };
     async function login() {
         if (IsValidate()) {
-            let items = { email, psw }
+            let items = { email, psw };
             const requestOptions = {
-                method: 'POST',
+                method: "POST",
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ 'email': email, 'psw': psw })
+                body: JSON.stringify({ email: email, psw: psw }),
             };
-            console.log(items, 'items')
-            let result = await fetch("https://crudcrud.com/api/b7fc87a7e1584fb4aaf12f7ec8493996/data", requestOptions)
-            result = await result.json(items)
-            console.log('result', result);
-            localStorage.setItem('token', email);
+            let result = await fetch(
+                "https://crudcrud.com/api/a2414ada59e84780b12edd634d9eda47/data",
+                requestOptions
+            );
+            result = await result.json(items);
+            localStorage.setItem("token", email);
             setIsLoggedin(true);
-            setEmail("")
-            setPassword("")
-            navigate("/")
+            setEmail("");
+            setPassword("");
+            navigate("/");
         }
     }
 
     const signupFun = () => {
-        navigate("/signup")
-    }
+        navigate("/signup");
+    };
 
     return (
         <>
@@ -102,7 +103,7 @@ const Signin = () => {
                 </div>
             </div>
         </>
-    )
-}
+    );
+};
 
-export default Signin
+export default Signin;

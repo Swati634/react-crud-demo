@@ -2,37 +2,77 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
-    const navigate = useNavigate()
-    const [name, setName] = useState("")
-    const [email, setEmail] = useState("")
-    const [psw, setPassword] = useState("")
-    const [cpsw, setCpsw] = useState("")
-    const getCookie = localStorage.getItem('token');
+    const navigate = useNavigate();
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [psw, setPassword] = useState("");
+    const [cpsw, setCpsw] = useState("");
+    const getCookie = localStorage.getItem("token");
     useEffect(() => {
         if (getCookie) {
-            navigate('/');
+            navigate("/");
         }
-    }, [getCookie])
+    }, [getCookie]);
 
-    async function signup() {
-        let items = { name, email, psw, cpsw }
-        const requestOptions = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ 'name': name, 'email': email, 'psw': psw })
-        };
-        console.log(items, 'items')
-        let result = await fetch("https://crudcrud.com/api/b7fc87a7e1584fb4aaf12f7ec8493996/data", requestOptions)
-        result = await result.json(items)
-        console.log('result', result);
-        localStorage.setItem('token', email);
-        setName("")
-        setEmail("")
-        setPassword("")
-        setCpsw("")
-        navigate("/")
+    const IsValidate = () => {
+        let isproceed = true;
+        let errormessage = "Please enter the value in ";
+
+        if (name === null || name === "") {
+            isproceed = false;
+            errormessage += "Name";
+        }
+        if (email === null || email === "") {
+            isproceed = false;
+            errormessage += " Email";
+        }
+        if (psw === null || psw === "") {
+            isproceed = false;
+            errormessage += " Password";
+        }
+        if (cpsw === null || cpsw === "") {
+            isproceed = false;
+            errormessage += "Confirm Password";
+        }
+        if (!isproceed) {
+            alert(errormessage);
+        } else {
+            if (/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email)) {
+            } else {
+                isproceed = false;
+                alert("Please enter the valid email");
+            }
+        }
+        return isproceed;
+    };
+
+    async function signupFunc() {
+        if (IsValidate()) {
+            let items = { name, email, psw, cpsw };
+            const requestOptions = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    name: name,
+                    email: email,
+                    psw: psw,
+                    cpsw: cpsw,
+                }),
+            };
+            let result = await fetch(
+                "https://crudcrud.com/api/a2414ada59e84780b12edd634d9eda47/data",
+                requestOptions
+            );
+            result = await result.json(items);
+            localStorage.setItem("token", email);
+            setName("");
+            setEmail("");
+            setPassword("");
+            setCpsw("");
+            navigate("/");
+        }
     }
     return (
         <>
@@ -95,7 +135,7 @@ const Signup = () => {
                 </div>
                 <br />
                 <div className="signin-btn">
-                    <button onClick={() => signup()}>Sign Up</button>
+                    <button onClick={() => signupFunc()}>Sign Up</button>
                 </div>
             </div>
         </>
