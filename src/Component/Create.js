@@ -3,7 +3,7 @@ import axios from "axios";
 import { Button, Form } from "semantic-ui-react";
 
 const Create = ({ isEdit, editData, getData, closeForm }) => {
-    const url = `https://crudcrud.com/api/b7fc87a7e1584fb4aaf12f7ec8493996/data`;
+    const url = `https://crudcrud.com/api/a2414ada59e84780b12edd634d9eda47/data`;
     const [Name, setName] = useState(editData?.Name ? editData?.Name : "");
     const [Age, setAge] = useState(editData?.Age ? editData?.Age : "");
 
@@ -11,7 +11,7 @@ const Create = ({ isEdit, editData, getData, closeForm }) => {
         if (isEdit) {
             axios
                 .put(
-                    `https://crudcrud.com/api/b7fc87a7e1584fb4aaf12f7ec8493996/data/${editData._id}`,
+                    `https://crudcrud.com/api/a2414ada59e84780b12edd634d9eda47/data/${editData._id}`,
                     {
                         Name,
                         Age,
@@ -22,8 +22,6 @@ const Create = ({ isEdit, editData, getData, closeForm }) => {
                     setAge("");
                     getData();
                     closeForm();
-
-                    console.log(isEdit, "isEdit");
                 });
         } else {
             axios
@@ -32,7 +30,6 @@ const Create = ({ isEdit, editData, getData, closeForm }) => {
                     Age,
                 })
                 .then((response) => {
-                    console.log(response, "response");
                     setName("");
                     setAge("");
                     getData();
